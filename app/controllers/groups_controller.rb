@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+
   def index
     @groups = Group.all
   end
@@ -17,6 +18,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+
     if @group.save
       redirect_to groups_path
     else
@@ -28,7 +30,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if @group.update(group_params)
-      redirect_to groups_path, notice: "Update Success"
+      redirect_to groups_path, notice: 'Update Success'
     else
       render :edit
     end
@@ -36,8 +38,9 @@ class GroupsController < ApplicationController
 
   def destroy
     @group = Group.find(params[:id])
+
     @group.destroy
-    redirect_to groups_path, alert: "Group deleted"
+    redirect_to groups_path, alert: 'Group deleted'
   end
 
   private
