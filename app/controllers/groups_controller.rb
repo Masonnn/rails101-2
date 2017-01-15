@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-    before_action :find_group_and_check_permission, only: [:each, :update, :destroy]
+    before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
 
     def index
         @groups = Group.all
@@ -15,7 +15,8 @@ class GroupsController < ApplicationController
         @posts = @group.posts.recent.paginate(page: params[:page], per_page: 5)
     end
 
-    def edit; end
+    def edit
+    end
 
     def create
         @group = Group.new(group_params)
