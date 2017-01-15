@@ -19,31 +19,32 @@ class PostsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @group = Group.find(params[:group_id])
-  #   @post = Post.find(params[:post_id])
-  # end
+  def edit
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @post.group = @group
+    @post.user = current_user
+  end
 
-  # def update
-  #   @post = current_user.post.find(@post[:id])
-  #
-  #   if @post.save
-  #     redirect_to posts_path, notice: "Update Success!"
-  #   else
-  #     edit
-  #   end
-  #
-  # end
-  #
-  # def destroy
-  #   @post = current_user.post.find(@post[:id])
-  #
-  #   if post.delete
-  #     redirect_to posts_path, alert: "Post deleted"
-  #   else
-  #     index
-  #   end
-  # end
+  def update
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @post.group = @group
+    @post.user = current_user
+    if @post.update(post_params)
+      redirect_to account_posts_path, notice: "文章已更新!"
+    end
+  end
+
+  def destroy
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @post.group = @group
+    @post.user = current_user
+
+    @post.destroy
+      redirect_to account_posts_path, alert: "文章已删除！"
+  end
 
   private
 
