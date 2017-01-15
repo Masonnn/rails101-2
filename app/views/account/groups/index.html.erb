@@ -1,0 +1,28 @@
+<div class="col-md-12">
+
+  <h2 class="text-center">我加入的群组</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>标题</th>
+        <th>描述</th>
+        <th>文章数</th>
+        <th>最近更新</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td> # </td>
+          <th> <%= link_to(group.title, group_path(group)) %> </th>
+          <th> <%= group.description %> </th>
+          <th> <%= group.posts.count %> </th>
+          <th> <%= group.updated_at %> </th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
